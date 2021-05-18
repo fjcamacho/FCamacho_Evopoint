@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FCPruebaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Permiso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo_Permiso" Type="int" Nullable="false" />
+          <Property Name="Fecha_Permiso" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPermiso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FCPruebaDB.dbo.vwPermiso' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPermiso">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="Apellidos_Empleado" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Fecha_Permiso" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Permiso" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Permiso_TipoPermiso">
+          <End Role="TipoPermiso" Type="Self.TipoPermiso" Multiplicity="1" />
+          <End Role="Permiso" Type="Self.Permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPermiso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permiso">
+              <PropertyRef Name="Tipo_Permiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FCPruebaDBModelStoreContainer">
+          <EntitySet Name="Permiso" EntityType="Self.Permiso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPermiso" EntityType="Self.TipoPermiso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwPermiso" EntityType="Self.vwPermiso" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwPermiso].[Id] AS [Id], 
+    [vwPermiso].[Nombre_Empleado] AS [Nombre_Empleado], 
+    [vwPermiso].[Apellidos_Empleado] AS [Apellidos_Empleado], 
+    [vwPermiso].[Descripcion] AS [Descripcion], 
+    [vwPermiso].[Fecha_Permiso] AS [Fecha_Permiso]
+    FROM [dbo].[vwPermiso] AS [vwPermiso]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Permiso_TipoPermiso" Association="Self.FK_Permiso_TipoPermiso">
+            <End Role="TipoPermiso" EntitySet="TipoPermiso" />
+            <End Role="Permiso" EntitySet="Permiso" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FCPruebaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Permiso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos_Empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo_Permiso" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Permiso" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TipoPermiso" Relationship="Self.FK_Permiso_TipoPermiso" FromRole="Permiso" ToRole="TipoPermiso" />
+        </EntityType>
+        <EntityType Name="TipoPermiso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Permisoes" Relationship="Self.FK_Permiso_TipoPermiso" FromRole="TipoPermiso" ToRole="Permiso" />
+        </EntityType>
+        <Association Name="FK_Permiso_TipoPermiso">
+          <End Role="TipoPermiso" Type="Self.TipoPermiso" Multiplicity="1" />
+          <End Role="Permiso" Type="Self.Permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPermiso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permiso">
+              <PropertyRef Name="Tipo_Permiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FCPruebaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Permisoes" EntityType="Self.Permiso" />
+          <EntitySet Name="TipoPermisoes" EntityType="Self.TipoPermiso" />
+          <AssociationSet Name="FK_Permiso_TipoPermiso" Association="Self.FK_Permiso_TipoPermiso">
+            <End Role="TipoPermiso" EntitySet="TipoPermisoes" />
+            <End Role="Permiso" EntitySet="Permisoes" />
+          </AssociationSet>
+          <EntitySet Name="vwPermisoes" EntityType="FCPruebaDBModel.vwPermiso" />
+        </EntityContainer>
+        <EntityType Name="vwPermiso">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="Apellidos_Empleado" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Fecha_Permiso" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos_Empleado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Permiso" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FCPruebaDBModelStoreContainer" CdmEntityContainer="FCPruebaDBEntities">
+          <EntitySetMapping Name="Permisoes">
+            <EntityTypeMapping TypeName="FCPruebaDBModel.Permiso">
+              <MappingFragment StoreEntitySet="Permiso">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="Apellidos_Empleado" ColumnName="Apellidos_Empleado" />
+                <ScalarProperty Name="Tipo_Permiso" ColumnName="Tipo_Permiso" />
+                <ScalarProperty Name="Fecha_Permiso" ColumnName="Fecha_Permiso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPermisoes">
+            <EntityTypeMapping TypeName="FCPruebaDBModel.TipoPermiso">
+              <MappingFragment StoreEntitySet="TipoPermiso">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPermisoes">
+            <EntityTypeMapping TypeName="FCPruebaDBModel.vwPermiso">
+              <MappingFragment StoreEntitySet="vwPermiso">
+                <ScalarProperty Name="Fecha_Permiso" ColumnName="Fecha_Permiso" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Apellidos_Empleado" ColumnName="Apellidos_Empleado" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

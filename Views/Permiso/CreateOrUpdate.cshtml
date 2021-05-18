@@ -1,0 +1,55 @@
+﻿@model FCamacho_EvoPoint.Models.Permiso
+@{
+    /**/
+
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("CreateOrUpdate", "Permiso", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, new { @class = "control-label" })
+        <div class="input-group">
+            <span class="input-group-addon"></span>
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nombre_Empleado, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Nombre_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Nombre_Empleado)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Apellidos_Empleado, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Apellidos_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Apellidos_Empleado)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Fecha_Permiso, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Fecha_Permiso, new { htmlAttributes = new { @class = "form-control datepicker" } })
+
+        <script>
+            $(function () {
+                $('#Fecha_Permiso').datepicker();
+            });
+        </script>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tipo_Permiso, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Tipo_Permiso, new { htmlAttributes = new { @class = "form-control select" } })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-success" />
+        <input type="reset" value="Reset" class="btn btn-warning" />
+    </div>
+
+
+}
