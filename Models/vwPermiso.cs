@@ -18,6 +18,6 @@ namespace FCamacho_EvoPoint.Models
         public string Nombre_Empleado { get; set; }
         public string Apellidos_Empleado { get; set; }
         public string Descripcion { get; set; }
-        public System.DateTime Fecha_Permiso { get; set; }
+        public string Fecha_Permiso { get; set; }
     }
 }

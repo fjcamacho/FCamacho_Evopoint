@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="FCPruebaDBModel.Permiso" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FCPruebaDBModel.TipoPermiso" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="FCPruebaDBModel.FK_Permiso_TipoPermiso" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="FCPruebaDBModel.vwPermiso" Width="1.5" PointX="5.75" PointY="1.125" />
+        <EntityTypeShape EntityType="FCPruebaDBModel.vwPermiso" Width="1.5" PointX="5.875" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -30,13 +30,12 @@ warning 6002: The table/view 'FCPruebaDB.dbo.vwPermiso' does not have a primary 
             <PropertyRef Name="Nombre_Empleado" />
             <PropertyRef Name="Apellidos_Empleado" />
             <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Fecha_Permiso" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Apellidos_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Fecha_Permiso" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_Permiso" Type="varchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_Permiso_TipoPermiso">
           <End Role="TipoPermiso" Type="Self.TipoPermiso" Multiplicity="1" />
@@ -117,13 +116,12 @@ warning 6002: The table/view 'FCPruebaDB.dbo.vwPermiso' does not have a primary 
             <PropertyRef Name="Nombre_Empleado" />
             <PropertyRef Name="Apellidos_Empleado" />
             <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Fecha_Permiso" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Empleado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Apellidos_Empleado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Permiso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Permiso" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
